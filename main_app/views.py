@@ -1,18 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
-class Monster:  
-  def __init__(self, name, breed, description, age):
-    self.name = name
-    self.breed = breed
-    self.description = description
-    self.age = age
+from .models import Monster
 
-monsters = [
-  Monster('Lolo', 'tabby', 'foul little demon', 3),
-  Monster('Sachi', 'tortoise shell', 'diluted tortoise shell', 0),
-  Monster('Raven', 'black tripod', '3 legged cat', 4)
-]
+# Create your views here.
+
 
 def home(request):
     return HttpResponse('<h1>Welcome monsters</h1>')
@@ -21,4 +12,9 @@ def about(request):
     return render(request, 'about.html')
 
 def monsters_index(request):
+  monsters = Monster.objects.all()
   return render(request, 'monsters/index.html', { 'monsters': monsters })
+
+def monsters_detail(request, monster_id):
+  monster = Monster.objects.get(id=monster_id)
+  return render(request, 'monsters/detail.html', { 'monster': monster })
