@@ -12,24 +12,26 @@
 </head>
 
 <body>
-    <header class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper">
-                <ul>
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;MonsterCollector</a></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="/monsters/index">View All the Monsters</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main class="container">
-        {% block content %} {% endblock %}
-    </main>
-    <footer class="page-footer">
-        <div class="right">All Rights Reserved, &copy; 2020 Monster Collector &nbsp;</div>
+    <div class="body #e0e0e0 grey lighten-2">
+        <header class="navbar-fixed #8bc34a light-green">
+            <nav>
+                <div class="nav-wrapper #8bc34a light-green">
+                    <ul>
+                        <li><a href="/" class="left brand-logo #8bc34a light-green">&nbsp;&nbsp;MonsterCollector</a></li>
+                    </ul>
+                    <ul class="right">
+                        <li><a href="/monsters/index">View All the Monsters</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main class="container #e0e0e0 grey lighten-2">
+            {% block content %} {% endblock %}
+        </main>
+    </div>
+    <footer class="page-footer #8bc34a light-green">
+        <div class="right">All Rights Reserved, &copy; 2020 Monster Collector | Amanda Claproth&nbsp;</div>
     </footer>
 </body>
 

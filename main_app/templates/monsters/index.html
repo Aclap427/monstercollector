@@ -3,16 +3,17 @@
 <h1>Monster List</h1>
 
 {% for monster in monsters %}
-<div class="card">
+<div class="card #263238 blue-grey darken-4">
     <a href="{% url 'detail' monster.id %}">
         <img src="{{ monster.image }}">
         <div class="card-content">
-            <span class="card-title">{{ monster.name }}</span>
-            <p>Breed: {{ monster.breed }}</p>
-            <p>Description: {{ monster.description }}</p>
-            <p>Origins: {{ monster.origin }}</p>
-            <p>Age: {{ monster.age }}</p>
-
+            <span class="card-title #689f38 light-green-text darken-2">{{ monster.name }}</span>
+            <div class="info #bdbdbd grey-text lighten-1">
+                <p>Breed: {{ monster.breed }}</p>
+                <p>Description: {{ monster.description }}</p>
+                <p>Origins: {{ monster.origin }}</p>
+                <p>Age: {{ monster.age }}</p>
+            </div>
         </div>
     </a>
 </div>
