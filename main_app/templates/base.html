@@ -20,8 +20,9 @@
                         <li><a href="/" class="left brand-logo #8bc34a light-green">&nbsp;&nbsp;MonsterCollector</a></li>
                     </ul>
                     <ul class="right">
-                        <li><a href="/monsters/index">View All the Monsters</a></li>
-                        <li><a href="/about">About</a></li>
+                        <li><a href="{% url 'index' %}">View All the Monsters</a></li>
+                        <li><a href="{% url 'monsters_create' %}">Add a Monster</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
                     </ul>
                 </div>
             </nav>

@@ -12,6 +12,10 @@
         <p>Age: {{ monster.age }}</p>
 
     </div>
+    <div class="card-action">
+        <a href="{% url 'monsters_update' monster.id %}">Edit</a>
+        <a href="{% url 'monsters_delete' monster.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}
