@@ -9,4 +9,5 @@ urlpatterns = [
   path('monsters/create/', views.MonsterCreate.as_view(), name='monsters_create'),
   path('monsters/<int:pk>/update/', views.MonsterUpdate.as_view(), name='monsters_update'),
   path('monsters/<int:pk>/delete/', views.MonsterDelete.as_view(), name='monsters_delete'),
+  path('monsters/<int:monster_id>/add_rental/', views.add_rental, name='add_rental'),
 ]
