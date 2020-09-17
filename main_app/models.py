@@ -3,7 +3,7 @@ from django.urls import reverse
 
 # Create your models here.
 class Monster(models.Model):
-    image = models.ImageField(upload_to='images/', height_field=50, width_field=50, null=True)
+    image = models.ImageField(upload_to='main_app/static/images', height_field=50, width_field=50, null=True)
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
