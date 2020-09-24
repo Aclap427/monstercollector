@@ -1,52 +1,103 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>{{ monster.name }}s Details</h1>
+<h1>Monster Details</h1>
 
-<div class="card">
-    <img src="{{ monster.image }}">
-    <div class=" card-content ">
-        <span class="card-title ">{{ monster.name }}</span>
-        <p>Breed: {{ monster.breed }}</p>
-        <p>Description: {{ monster.description }}</p>
-        <p>Origins: {{ monster.origin }}</p>
-        <p>Age: {{ monster.age }}</p>
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ monster.name }}</span>
+                <p>Breed: {{ monster.breed }}</p>
+                <p>Description: {{ monster.description }}</p>
+                <p>Origin: {{ monster.origin }}</p>
+                <p>Age: {{ monster.age }}</p>
 
+            </div>
+            <div class="card-action">
+                <a href="{% url 'monsters_update' monster.id %}">Edit</a>
+                <a href="{% url 'monsters_delete' monster.id %}">Delete</a>
+            </div>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'monsters_update' monster.id %}">Edit</a>
-        <a href="{% url 'monsters_delete' monster.id %}">Delete</a>
+    <div class="col s6">
+        <form action="{% url 'add_rental' monster.id %}" method="post">
+            {% csrf_token %} {{ rental_form.as_p }}
+            <input type="submit" class="btn" value="Rent this Monster">
+        </form>
+        <br> {% if monster.rental_for_today %}
+        <div class="card-panel teal-text center-align">{{monster.name}} is already booked, sorry!</div>
+        {% else %}
+        <div class="card-panel red-text center-align">{{monster.name}} is available for your party!</div>
+        {% endif %}
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Timeframe</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in monster.rental_set.all %}
+                <tr>
+                    <td>{{rental.date}}</td>
+                    <td>{{rental.get_timeframe_display}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-
 <div class="col s6">
-    <form action="{% url 'add_rental' monster.id %}" method="post">
-        {% csrf_token %} {{ rental_form.as_p }}
-        <input type="submit" class="btn" value="Add Rental">
-    </form>
-    <br> {% if monster.rental_for_today %}
-    <div class="card-panel teal-text center-align">{{monster.name}} is unavailable today</div>
-    {% else %}
-    <div class="card-panel red-text center-align">{{monster.name}} would love to visit your party!</div>
+    <h3>Available Extras</h3>
+    {% if extras.count %} {% for extra in extras.all %}
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">
+                 <span style="description: {{ extra.description }}">{{ extra.description }}</span>
+            </span>
+        </div>
+        <div class="card-action">
+            <form action="{% url 'assoc_extra' monster.id extra.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn">Add</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>{{monster.name}} Already Has All Extras Available</h5>
     {% endif %}
-    <table class="striped">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time of Day</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for rental in monster.rental_set.all %}
-            <tr>
-                <td>{{rental.date}}</td>
-                <td>{{rental.get_timeframe_display}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </div>
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{ monster.name }}'s Extras</h3>
+        {% if monster.extras.count %} {% for extra in monster.extras.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                     <span style="description: {{ extra.description }}">{{ extra.description }}</span>
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'unassoc_extra' monster.id extra.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="remove" class="btn">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        <p></p> {% else %}
+        <h5>No Extras :(</h5>
+        {% endif %}
+    </div>
+
+
 </div>
+
+
+<!-- JS to create a date picker and init the meal dropdown -->
 <script>
+    // create a datepicker
     var dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {
         format: 'yyyy-mm-dd',
@@ -54,7 +105,7 @@
         setDefaultDate: true,
         autoClose: true
     });
-    // initialize the meal select
+
     var selectEl = document.getElementById('id_timeframe');
     M.FormSelect.init(selectEl);
 </script>

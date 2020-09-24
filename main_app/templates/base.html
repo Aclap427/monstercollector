@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,31 +10,36 @@
     <title>Monster Collector</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
-    <div class="body #e0e0e0 grey lighten-2">
-        <header class="navbar-fixed #8bc34a light-green">
-            <nav>
-                <div class="nav-wrapper #8bc34a light-green">
-                    <ul>
-                        <li><a href="/" class="left brand-logo #8bc34a light-green">&nbsp;&nbsp;MonsterCollector</a></li>
-                    </ul>
-                    <ul class="right">
-                        <li><a href="{% url 'index' %}">View All the Monsters</a></li>
-                        <li><a href="{% url 'monsters_create' %}">Create a Monster</a></li>
-                        <li><a href="{% url 'about' %}">About</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <main class="container #e0e0e0 grey lighten-2">
-            {% block content %} {% endblock %}
-        </main>
-    </div>
-    <footer class="page-footer #8bc34a light-green">
-        <div class="right">All Rights Reserved, &copy; 2020 Monster Collector | Amanda Claproth&nbsp;</div>
+
+    <header class=" #00695c teal darken-3
+ navbar-fixed ">
+        <nav>
+            <div class="#00695c teal darken-3
+ nav-wrapper ">
+
+                <ul class="right ">
+                    <li><a href="{% url 'about' %} ">About</a></li>
+                    <li><a href="{% url 'extras_create' %} ">Add an Extra</a></li>
+                    <li><a href="{% url 'extras_index' %} ">View All Extras</a></li>
+                    <li><a href="{% url 'monsters_create' %} ">Add a Monster</a></li>
+                    <li><a href="{% url 'index' %} ">View All Monsters</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container ">
+        {% block content %} {% endblock %}
+    </main>
+
+    <footer class="page-footer #00695c teal darken-3">
+        <div class="right ">All Rights Reserved, &copy; 2020 Monster Collector &nbsp; | &nbsp; Amanda Claproth &nbsp;</div>
     </footer>
+
 </body>
 
 </html>
